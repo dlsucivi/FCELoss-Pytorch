@@ -19,5 +19,5 @@ Implementation of the Fair Channel Enhancement Loss in Pytorch
 `utils_py`: Contains additional helpy functions
 
 ## Usage
-To use the fair channel enhancement loss separately, import the `fce` functionfrom the **fce_loss.py** file. Keep in mind the required parameters to be passed. The model must also be modified to output the extracted features separately. 
+To use the fair channel enhancement loss separately, import the `fce` function from the **fce_loss.py** file. Keep in mind the required parameters to be passed. The model must also be modified to output the extracted features separately. 
 

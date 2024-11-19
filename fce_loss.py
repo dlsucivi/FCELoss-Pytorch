@@ -80,7 +80,7 @@ def compute_class_groups(channels_per_class):
             channels.append(channels_per_class[i-1])
             cur_group_count = 1
         else:
-            curr_group_count += 1
+            cur_group_count += 1
 
     groups.append(cur_group_count)
     channels.append(channels_per_class[i])
@@ -157,13 +157,13 @@ def get_mask(batch_size, channels, groups, device):
             
         for j in range(groups[i]):
             random.shuffle(foo)
-            bar += foo
+            mask += foo
 
     mask = [mask for i in range(batch_size)]
     mask = np.array(mask).astype("float32")
     mask = mask.reshape(batch_size,total_channels,1,1)
     mask = torch.from_numpy(mask)
-    mask = bar.to(device)
+    mask = mask.to(device)
     mask = Variable(mask)
 
     return mask
@@ -203,10 +203,10 @@ def fce(x, targets, channels, groups, criterion, alpha, device):
         features = F.max_pool2d(features.view(n, -1, h * w), 
                                 kernel_size=(channels[i], 1), 
                                 stride=(channels[i], 1))
-        fce.append(features)
+        fce_output.append(features)
 
-    fce_output = torch.cat(fce, dim=1).view(n, -1, h, w)
-    fce_output = nn.AdaptiveAvgPool2d((1, 1))(fce).view(n, -1)  
+    fce_output = torch.cat(fce_output, dim=1).view(n, -1, h, w)
+    fce_output = nn.AdaptiveAvgPool2d((1, 1))(fce_output).view(n, -1)  
 
     fce_loss = criterion(fce_output, targets) * alpha
 

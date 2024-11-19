@@ -52,21 +52,6 @@ criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
 #     PREPARE DATASET   #
 #########################
 print('==> Preparing data..')
-
-transform_train = transforms.Compose([
-    transforms.Resize((224,224)),
-    transforms.RandomCrop(224, padding=4),
-    transforms.RandomHorizontalFlip(),
-    transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
-])
-
-transform_test = transforms.Compose([
-    transforms.Resize((224,224)),
-    transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
-])
-
 trainset = SD(data_path=DATA_PATH,
               ver=VERSION,
               split=SPLIT,
